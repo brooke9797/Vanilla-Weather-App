@@ -26,4 +26,24 @@ li{
     font-size: 16px;
     font-weight: 100;
     line-height: 19px;
+    text-align: right;
+}
+.overview{
+    margin-bottom: 20px;
+}
+.weather-temperature img {
+margin-right: 10px;
+float:left;
+height: 64px;
+width: 64px;
+}
+.weather-temperature strong{
+    font-size: 64px;
+    line-height: 1;
+    font-weight: 400;
+}
+.weather-temperature .units{
+    position: relative;
+    font-size: 16px;
+    top:-34px;
 }
