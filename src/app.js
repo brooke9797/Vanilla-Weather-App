@@ -40,8 +40,20 @@ iconElement.setAttribute("src",`http://shecodes-assets.s3.amazonaws.com/api/weat
 iconElement.setAttribute("alt", response.data.condition.icon);
 }
 
+function search(city){
+    let apiKey = "5a80183327bo71ba4bt881f57e95e87f";
+    let apiUrl = `https://api.shecodes.io/weather/v1/current?query=Tampa&key=5a80183327bo71ba4bt881f57e95e87f&units=metric`;
+    axios.get(apiUrl).then(displayTemperature);   
+}
 
-let apiKey = "5a80183327bo71ba4bt881f57e95e87f";
-let apiUrl = 'https://api.shecodes.io/weather/v1/current?query=Tampa&key=5a80183327bo71ba4bt881f57e95e87f&units=metric';
-axios.get(apiUrl).then(displayTemperature);
+function handleSubmit(event){
+    event.preventDefault();
+    let cityInputElement = document.querySelector("#city-input");
+    search(cityInputElement.value);
+}
 
+search("Tampa");
+
+
+let form = document.querySelector("#search-form");
+form.addEventListener("submit", handleSubmit);
