@@ -30,6 +30,9 @@ let humidityElement=document.querySelector("#humidity");
 let windElement= document.querySelector("#wind");
 let dateElement= document.querySelector("#date");
 let iconElement=document.querySelector("#icon");
+
+celsiusTemperature = response.data.temperature.current;
+
 temperatureElement.innerHTML = Math.round(response.data.temperature.current);
 cityElement.innerHTML=response.data.city;
 descriptionElement.innerHTML = response.data.condition.description;
@@ -42,7 +45,7 @@ iconElement.setAttribute("alt", response.data.condition.icon);
 
 function search(city){
     let apiKey = "5a80183327bo71ba4bt881f57e95e87f";
-    let apiUrl = `https://api.shecodes.io/weather/v1/current?query=Tampa&key=5a80183327bo71ba4bt881f57e95e87f&units=metric`;
+    let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=5a80183327bo71ba4bt881f57e95e87f&units=metric`;
     axios.get(apiUrl).then(displayTemperature);   
 }
 
@@ -52,8 +55,30 @@ function handleSubmit(event){
     search(cityInputElement.value);
 }
 
-search("Tampa");
+function displayFahrenheitTemperature(event) {
+    event.preventDefault();
+    let temperatureElement = document.querySelector("#temperature");
+    let fahrenheitTemperature = (celsiusTemperature * 9) / 5 + 32;
+    temperatureElement.innerHTML = Math.round(fahrenheitTemperature); 
+}
 
+function displayCelsiusTemperature(event) {
+    event.preventDefault();
+    let temperatureElement = document.querySelector("#temperature");
+    temperatureElement.innerHTML = Math.round(celsiusTemperature);
+}
+
+let celsiusTemperature = null;
 
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", handleSubmit);
+
+let fahrenheitLink = document.querySelector("#fahrenheit-link");
+fahrenheitLink.addEventListener("click", displayFahrenheitTemperature);
+
+let celsiusLink = document.querySelector("#celsius-link");
+celsiusLink.addEventListener("click", displayCelsiusTemperature);
+
+
+
+search("Tampa");
